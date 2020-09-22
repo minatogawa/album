@@ -33,7 +33,7 @@
     <div class="card-columns container mt-3">
       <%for(item of data){%>
         <div class="card">
-          <img src=<%=item.image%> class="card-img-top" alt="...">
+          <a href="/posts/<%=item._id%>"><img src=<%=item.image%> class="card-img-top" alt="..."></a>
           <div class="card-body">
             <h5 class="card-title"><%=item.title%></h5>
             <p class="card-text text-truncate"><%=item.description%></p>

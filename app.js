@@ -46,6 +46,15 @@ app.post('/posts', async (req, res) =>{
   }
 })
 
+app.get('/posts/:id', async(req, res) =>{
+  try{
+    const data = await Post.findById(req.params.id);
+    res.render('show', {data:data})
+  }catch(err){
+    console.log(err)
+  }
+})
+
 app.listen(3000, () =>{
     console.log("SERVER IS RUNNING")
 })
