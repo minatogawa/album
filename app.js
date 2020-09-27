@@ -49,7 +49,7 @@ app.post('/posts', async (req, res) =>{
 
 app.get('/posts/:id', async(req, res) =>{
   try{
-    const data = await Post.findById(req.params.id);
+    const data = await Post.findById(req.params.id).populate('comments').exec();
     res.render('show', {data:data})
   }catch(err){
     console.log(err)
@@ -57,10 +57,10 @@ app.get('/posts/:id', async(req, res) =>{
 })
 
 // ##########################COMMENTS ROUTES##############################
-app.get('/posts/:id/comments/new', (req, res)=>{
-  const id = req.params.id;
-  res.render('Comments/new', {id: id})
-})
+// app.get('/posts/:id/comments/new', (req, res)=>{
+//   const id = req.params.id;
+//   res.render('Comments/new', {id: id})
+// })
 
 app.post('/posts/:id/comments', async(req, res) =>{
   try{
@@ -68,7 +68,7 @@ app.post('/posts/:id/comments', async(req, res) =>{
     const Comm = await Comment.create({comment:req.body.comment});
     await Camp.comments.push(Comm);
     await Camp.save();
-    res.redirect(`/posts/${req.params.id}`)
+    res.redirect(`/posts/${req.params.id}`) //Ajax necessary for not refreshing the page after creating the comment  
   }catch(err){
     console.log(err)
   }
