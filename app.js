@@ -5,6 +5,7 @@ const bodyParser = require ('body-parser')
 
 // Required models
 const Post = require('./models/postSchema');
+const Comment = require('./models/commentSchema');
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -54,6 +55,25 @@ app.get('/posts/:id', async(req, res) =>{
     console.log(err)
   }
 })
+
+// ##########################COMMENTS ROUTES##############################
+app.get('/posts/:id/comments/new', (req, res)=>{
+  const id = req.params.id;
+  res.render('Comments/new', {id: id})
+})
+
+app.post('/posts/:id/comments', async(req, res) =>{
+  try{
+    const Camp = await Post.findById(req.params.id);
+    const Comm = await Comment.create({comment:req.body.comment});
+    await Camp.comments.push(Comm);
+    await Camp.save();
+    res.redirect(`/posts/${req.params.id}`)
+  }catch(err){
+    console.log(err)
+  }
+})
+
 
 app.listen(3000, () =>{
     console.log("SERVER IS RUNNING")
