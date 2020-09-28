@@ -6,6 +6,8 @@ const bodyParser = require ('body-parser')
 // Required models
 const Post = require('./models/postSchema');
 const Comment = require('./models/commentSchema');
+const User = require('./models/userSchema');
+
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -21,6 +23,8 @@ db.once('open', function() {
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
+// #######################Posts Routes################################
 app.get('/posts', async(req, res) =>{
     try{
       const data = await Post.find({});
@@ -74,7 +78,13 @@ app.post('/posts/:id/comments', async(req, res) =>{
   }
 })
 
+// ##########################AUTHENTICATION ROUTES##############################
+// app.get('/register', (req, res) =>{
 
+// })
+
+
+// ###############Listening Port##############################
 app.listen(3000, () =>{
     console.log("SERVER IS RUNNING")
 })
