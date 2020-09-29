@@ -1,7 +1,7 @@
 To dos
 
-- Reference Comments data to Post Schema
-- Create comments route
+- Reference Comments data to Post Schema - ok
+- Create comments route - ok
 - Create authentication
 - Reference auth data to posts and Comments
 - Adding GoogleMaps api

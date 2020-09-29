@@ -1,0 +1,33 @@
+<%- include ('partials/header')%>
+
+<div class="container">
+    <div class="row d-flex align-items-center">
+        <div class="col-lg-6 text-center">
+            <img class="w-75" src="https://images.pexels.com/photos/2437291/pexels-photo-2437291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+        </div>
+        <form class="col-lg-6" action="/register" method="POST">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Full Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Arya Stark">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="noname_girl">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="arya@winterfell.com">
+              <small id="emailHelp" name="email" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <!-- <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

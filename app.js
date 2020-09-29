@@ -1,7 +1,9 @@
 // NPM required packages
 const express = require('express');
 const app = express();
-const bodyParser = require ('body-parser')
+const bodyParser = require ('body-parser');
+const session = require('express-session');
+const passport = require('passport');
 
 // Required models
 const Post = require('./models/postSchema');
@@ -22,8 +24,17 @@ db.once('open', function() {
 // Sets and middlewares
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(session({
+  secret: 'keyboard cat',
+  resave:false,
+  saveUninitialized:false
+},));
+app.use(passport.initialize());
+app.use(passport.session());
 
-
+// Passport configs
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 // #######################Posts Routes################################
 app.get('/posts', async(req, res) =>{
     try{
@@ -79,9 +90,24 @@ app.post('/posts/:id/comments', async(req, res) =>{
 })
 
 // ##########################AUTHENTICATION ROUTES##############################
-// app.get('/register', (req, res) =>{
+app.get('/register', (req, res) =>{
+  res.render('register')
+})
 
-// })
+app.post('/register', async(req, res)=>{
+  try{
+    // Not saving name and email in the database, need further investigation on this behaviour using passport-mongoose
+    const name = req.body.name;
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const userData = await User.register({name:name, username:username, email:email}, password)
+    res.redirect('/posts')
+  }
+  catch(err){
+    console.log(err)
+  }
+})
 
 
 // ###############Listening Port##############################
