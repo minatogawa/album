@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require ('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const LocalStrategy = require('passport-local')
 
 // Required models
 const Post = require('./models/postSchema');
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport configs
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 // #######################Posts Routes################################
@@ -112,6 +114,13 @@ app.post('/register', async(req, res)=>{
 app.get('/login', (req, res) =>{
   res.render('login')
 })
+
+app.post('/login', passport.authenticate('local', 
+{
+  successRedirect:'/posts',
+  failureRedirect:'/login',
+  failureFlash: true
+}))
 
 
 // ###############Listening Port##############################
