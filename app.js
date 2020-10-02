@@ -32,11 +32,16 @@ app.use(session({
 },));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next)=>{
+  res.locals.user = req.user;
+  next();
+})
 
 // Passport configs
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 // #######################Posts Routes################################
 app.get('/posts', async(req, res) =>{
     try{
@@ -119,9 +124,12 @@ app.post('/login', passport.authenticate('local',
 {
   successRedirect:'/posts',
   failureRedirect:'/login',
-  failureFlash: true
 }))
 
+app.get('/logout', (req, res) =>{
+  req.logout();
+  res.redirect('/login');
+});
 
 // ###############Listening Port##############################
 app.listen(3000, () =>{
