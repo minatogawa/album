@@ -4,7 +4,8 @@ const app = express();
 const bodyParser = require ('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local')
+const LocalStrategy = require('passport-local');
+const flash = require('connect-flash');
 
 // Required models
 const Post = require('./models/postSchema');
@@ -30,10 +31,13 @@ app.use(session({
   resave:false,
   saveUninitialized:false
 },));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next)=>{
   res.locals.user = req.user;
+  res.locals.success_messages = req.flash('success_messages');
+  res.locals.error_messages = req.flash('error_messages');
   next();
 })
 
@@ -43,7 +47,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // #######################Posts Routes################################
-app.get('/posts', async(req, res) =>{
+app.get('/posts', isLoggedIn, async(req, res) =>{
     try{
       const data = await Post.find({});
       res.render("index", {data: data})
@@ -52,7 +56,7 @@ app.get('/posts', async(req, res) =>{
     }
 })
 
-app.get('/posts/new', (req, res) =>{
+app.get('/posts/new', isLoggedIn, (req, res) =>{
     res.render('new')
 })
 
@@ -71,7 +75,7 @@ app.post('/posts', async (req, res) =>{
   }
 })
 
-app.get('/posts/:id', async(req, res) =>{
+app.get('/posts/:id', isLoggedIn, async(req, res) =>{
   try{
     const data = await Post.findById(req.params.id).populate('comments').exec();
     res.render('show', {data:data})
@@ -86,7 +90,7 @@ app.get('/posts/:id', async(req, res) =>{
 //   res.render('Comments/new', {id: id})
 // })
 
-app.post('/posts/:id/comments', async(req, res) =>{
+app.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
   try{
     const Camp = await Post.findById(req.params.id);
     const Comm = await Comment.create(
@@ -131,12 +135,20 @@ app.post('/login', passport.authenticate('local',
 {
   successRedirect:'/posts',
   failureRedirect:'/login',
+  failureFlash:true,
 }))
 
 app.get('/logout', (req, res) =>{
   req.logout();
   res.redirect('/login');
 });
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/login')
+}
 
 // ###############Listening Port##############################
 app.listen(3000, () =>{

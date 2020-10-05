@@ -18,12 +18,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <%if(user){%>
                         <li class="nav-item">
                             <a class="nav-link" href="/posts/new">Novo</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <%if(user){%>
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Olá <%=user.username%></a>
                         </li>
@@ -42,3 +42,7 @@
                 </div>
             </div>
         </nav>
+
+        <% if (error_messages && error_messages.length > 0){ %>
+            <p>Olá</p>
+        <%}%>
