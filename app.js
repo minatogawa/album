@@ -30,14 +30,14 @@ app.use(session({
   secret: 'keyboard cat',
   resave:false,
   saveUninitialized:false
-},));
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next)=>{
   res.locals.user = req.user;
-  res.locals.success_messages = req.flash('success_messages');
-  res.locals.error_messages = req.flash('error_messages');
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
   next();
 })
 
@@ -119,11 +119,20 @@ app.post('/register', async(req, res)=>{
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const userData = await User.register({name:name, username:username, email:email}, password)
-    res.redirect('/posts')
+    const newUser = await User.register({name:name, username:username, email:email}, password);
+    req.login(newUser, (err)=>{
+      if(err){
+        console.log(err);
+      }else{
+        req.flash('success', `Bem vindo ${newUser.username}`)
+        res.redirect('/posts')
+      }
+    })
   }
   catch(err){
     console.log(err)
+    req.flash('error', err.message);
+    res.redirect('/register')
   }
 })
 
@@ -136,10 +145,12 @@ app.post('/login', passport.authenticate('local',
   successRedirect:'/posts',
   failureRedirect:'/login',
   failureFlash:true,
+  successFlash: `Bem vindo de volta`
 }))
 
 app.get('/logout', (req, res) =>{
   req.logout();
+  req.flash('success', 'Logged you out')
   res.redirect('/login');
 });
 
