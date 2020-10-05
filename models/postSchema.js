@@ -10,10 +10,7 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-    author:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
+    author:String, //Porque Colt salvou o Id junto, e porque usando objectId?
 })
 
 module.exports  = mongoose.model('Post', postSchema);

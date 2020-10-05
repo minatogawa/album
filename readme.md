@@ -4,6 +4,6 @@ To dos
 - Create comments route - ok
 - Create authentication - ok
 - Create authentication and authorization middlewares 
-- Reference auth data to posts and Comments - (need to remember it)
+- Reference auth data to posts and Comments - ok
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info

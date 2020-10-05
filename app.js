@@ -62,7 +62,9 @@ app.post('/posts', async (req, res) =>{
       title: req.body.title,
       image: req.body.image,
       description: req.body.description,
+      author: req.user.username,
     })
+    console.log(req.user.username)
     res.redirect("/posts")
   }catch(err){
     console.log(err);
@@ -87,10 +89,15 @@ app.get('/posts/:id', async(req, res) =>{
 app.post('/posts/:id/comments', async(req, res) =>{
   try{
     const Camp = await Post.findById(req.params.id);
-    const Comm = await Comment.create({comment:req.body.comment});
+    const Comm = await Comment.create(
+      {
+        author: req.user.username,
+        comment:req.body.comment
+      }
+    );
     await Camp.comments.push(Comm);
     await Camp.save();
-    res.redirect(`/posts/${req.params.id}`) //Ajax necessary for not refreshing the page after creating the comment  
+    res.redirect(`/posts/${req.params.id}`) //Ajax necessary for not refreshing the page after creating the comment?
   }catch(err){
     console.log(err)
   }
