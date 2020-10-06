@@ -11,18 +11,22 @@
 
         <!-- Title -->
         <h1 class="mt-4"><%=data.title%></h1>
-
         <!-- Author -->
-        <p class="lead">
-          by
-          <a href="#"><%=data.author%></a>
-        </p>
-
+        <div class="d-flex m-0">
+          <p class="lead">
+            by
+            <a href="#"><%=data.author%></a>
+          </p>
+          <div class="ml-auto">
+            <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
+            <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+          </div>
+        </div>
+        
         <hr>
 
         <!-- Date/Time -->
         <p>Posted on January 1, 2019 at 12:00 PM</p>
-
         <hr>
 
         <!-- Preview Image -->

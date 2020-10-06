@@ -7,11 +7,14 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const flash = require('connect-flash');
 
+
 // Required models
 const Post = require('./models/postSchema');
 const Comment = require('./models/commentSchema');
 const User = require('./models/userSchema');
 
+// Required Router
+const postsRoutes = require('./routes/posts')
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -41,12 +44,14 @@ app.use((req, res, next)=>{
   next();
 })
 
+app.use(postsRoutes);
+
 // Passport configs
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// #######################Posts Routes################################
+// // #######################Posts Routes################################
 app.get('/posts', isLoggedIn, async(req, res) =>{
     try{
       const data = await Post.find({});
