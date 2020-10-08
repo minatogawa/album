@@ -6,9 +6,10 @@ To dos
 - Create authentication middleware - ok
 - Reference auth data to posts and Comments - ok
 - Add flash messages for passport - ok
-- refactor code (adding router)
+- refactor code (adding router) - ok
 - Create Update and Delete routes
 - Create authorization middleware
+- Separate middlewares in a specific file
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms
