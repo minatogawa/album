@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
 
 // Required models
 const Post = require('./models/postSchema');
@@ -20,7 +21,6 @@ const authenticationRoutes = require('./routes/authentication')
 // Mongoose connection
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/album', {useNewUrlParser: true, useUnifiedTopology: true});
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -29,7 +29,8 @@ db.once('open', function() {
 
 // Sets and middlewares
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(session({
   secret: 'keyboard cat',
   resave:false,
@@ -47,6 +48,7 @@ app.use((req, res, next)=>{
 app.use(postsRoutes);
 app.use(commentsRoutes);
 app.use(authenticationRoutes);
+
 
 // Passport configs
 passport.use(new LocalStrategy(User.authenticate()));

@@ -45,6 +45,10 @@ router.get('/posts/:id', isLoggedIn, async(req, res) =>{
   }
 })
 
+router.get('/posts/:id/edit', (req, res) =>{
+  res.send("Edit route")
+})
+
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
