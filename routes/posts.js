@@ -49,6 +49,16 @@ router.get('/posts/:id/edit', (req, res) =>{
   res.send("Edit route")
 })
 
+router.delete('/posts/:id', async (req, res) =>{
+  try{
+    await Post.deleteOne({_id:req.params.id});
+    req.flash('success', 'Seu post foi deletado')
+    res.redirect('/posts')
+  } catch(err){
+    console.log(err)
+  }
+})
+
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();

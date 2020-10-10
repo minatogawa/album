@@ -21,8 +21,8 @@
             <a href="/posts/<%=data._id%>/edit">
               <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
             </a>
-            <form class="d-inline" action="/posts/<%=data._id%>">
-              <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+            <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
             </form>
           </div>
         </div>

@@ -8,6 +8,7 @@ To dos
 - Add flash messages for passport - ok
 - refactor code (adding router) - ok
 - Create Update and Delete routes
+- Delete associated data
 - Create authorization middleware
 - Separate middlewares in a specific file
 - Adding GoogleMaps api
