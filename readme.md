@@ -7,8 +7,9 @@ To dos
 - Reference auth data to posts and Comments - ok
 - Add flash messages for passport - ok
 - refactor code (adding router) - ok
-- Create Update and Delete routes
+- Create Update and Delete for post routes - ok
 - Delete associated data - ok
+- Create Update and Delete for comments routes
 - Create authorization middleware
 - Separate middlewares in a specific file
 - Adding GoogleMaps api

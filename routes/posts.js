@@ -47,8 +47,27 @@ router.get('/posts/:id', isLoggedIn, async(req, res) =>{
   }
 })
 
-router.get('/posts/:id/edit', (req, res) =>{
-  res.send("Edit route")
+router.get('/posts/:id/edit', isLoggedIn, async (req, res) =>{
+  try{
+    const data = await Post.findById({_id:req.params.id})
+    console.log(data)
+    res.render("edit", {data:data})
+  }catch(err){
+    console.log(err)
+  }
+})
+
+router.put('/posts/:id', async(req, res) =>{
+  try{
+    const data = await Post.findByIdAndUpdate(req.params.id, {
+      title:req.body.title,
+      image:req.body.image,
+      description:req.body.description,
+    })
+    res.redirect(`/posts/${req.params.id}`)
+  }catch(err){
+    console.log(err)
+  }
 })
 
 router.delete('/posts/:id', async (req, res) =>{
