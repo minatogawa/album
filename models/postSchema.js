@@ -13,5 +13,19 @@ const postSchema = new mongoose.Schema({
     author:String, //Porque Colt salvou o Id junto, e porque usando objectId?
 })
 
+postSchema.pre('remove', async function(){
+    try{
+        await Comment.remove(
+            {
+                "_id":{
+                    $in:this.comments
+                }
+            }
+        )
+    }catch(err){
+        console.log(err)
+    }
+})
+
 module.exports  = mongoose.model('Post', postSchema);
 

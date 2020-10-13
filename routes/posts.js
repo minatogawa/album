@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/postSchema');
+const Comment = require('../models/commentSchema');
 
 router.get('/', (req, res) =>{
   res.send("hello world")
@@ -30,6 +31,7 @@ router.post('/posts', async (req, res) =>{
       author: req.user.username,
     })
     console.log(req.user.username)
+    req.flash('success', "Seu post foi criado com sucesso!")
     res.redirect("/posts")
   }catch(err){
     console.log(err);
@@ -51,7 +53,8 @@ router.get('/posts/:id/edit', (req, res) =>{
 
 router.delete('/posts/:id', async (req, res) =>{
   try{
-    await Post.deleteOne({_id:req.params.id});
+    const data = await Post.findById({_id:req.params.id});
+    await data.remove()
     req.flash('success', 'Seu post foi deletado')
     res.redirect('/posts')
   } catch(err){

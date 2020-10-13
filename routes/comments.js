@@ -16,6 +16,7 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
       );
       await postData.comments.push(Comm);
       await postData.save();
+      req.flash('success', "Comentário Adicionado!")
       res.redirect(`/posts/${req.params.id}`) //Ajax necessary for not refreshing the page after creating the comment?
     }catch(err){
       console.log(err)
