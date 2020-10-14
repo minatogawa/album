@@ -18,9 +18,7 @@
             <a href="#"><%=data.author%></a>
           </p>
           <div class="ml-auto">
-            <a href="/posts/<%=data._id%>/edit">
-              <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
-            </a>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
             <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
               <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
             </form>
@@ -63,7 +61,13 @@
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
               <h5 class="mt-0"><%=item.author%></h5>
-              <%=item.comment%>
+              <p><%=item.comment%></p>
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
+                <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+              </div>
             </div>
           </div>
         <%}%>

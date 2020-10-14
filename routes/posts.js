@@ -74,7 +74,7 @@ router.delete('/posts/:id', async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id});
     await data.remove()
-    req.flash('success', 'Seu post foi deletado')
+    req.flash('success', 'Seu post foi deletado com sucesso')
     res.redirect('/posts')
   } catch(err){
     console.log(err)
