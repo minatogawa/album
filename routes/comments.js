@@ -24,10 +24,24 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
   }
 })
 
-// Edit comment Routes
+// Edit comment Route
 router.get('/posts/:id/comments/:comment_id/edit', async(req, res) =>{
   try{
-    res.send("Edit comment route")
+    const data = await Comment.findById({_id: req.params.comment_id});
+    console.log(data);
+    res.render("comments/edit", {data:data, post_id:req.params.id})
+  }catch(err){
+    console.log(err)
+  }
+})
+
+// Update comment Route
+router.put('/posts/:id/comments/:comment_id', async(req, res) =>{
+  try{
+    await Comment.updateOne({_id: req.params.comment_id}, {comment: req.body.comment} )
+    req.flash('success', 'Comentário editado com sucesso!')
+    res.redirect(`/posts/${req.params.id}`)
+    // await res.send('update comment route')
   }catch(err){
     console.log(err)
   }
