@@ -5,7 +5,7 @@ const passport = require('passport');
 
 // ##########################AUTHENTICATION ROUTES##############################
 router.get('/register', (req, res) =>{
-    res.render('register')
+    res.render('authentication/register')
 })
   
 router.post('/register', async(req, res)=>{
@@ -33,7 +33,7 @@ router.post('/register', async(req, res)=>{
 })
   
 router.get('/login', (req, res) =>{
-    res.render('login')
+    res.render('authentication/login')
 })
   
 router.post('/login', passport.authenticate('local', 

@@ -1,4 +1,4 @@
-<%- include ('partials/header')%>
+<%- include ('../partials/header')%>
 
 
   <!-- Page Content -->
@@ -63,14 +63,14 @@
               <h5 class="mt-0"><%=item.author%></h5>
               <p><%=item.comment%></p>
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit">Edit</a></button>
                 <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                 </form>
               </div>
             </div>
           </div>
-        <%}%>
+        <%}%>        
         <!-- Comment with nested comments -->
         <!-- <div class="media mb-4">
           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">

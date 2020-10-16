@@ -12,14 +12,14 @@ router.get('/', (req, res) =>{
 router.get('/posts', isLoggedIn, async(req, res) =>{
     try{
       const data = await Post.find({});
-      res.render("index", {data: data})
+      res.render("posts/index", {data: data})
     }catch(err){
       console.log(err)  
     }
 })
 
 router.get('/posts/new', isLoggedIn, (req, res) =>{
-    res.render('new')
+    res.render('posts/new')
 })
 
 router.post('/posts', async (req, res) =>{
@@ -41,7 +41,7 @@ router.post('/posts', async (req, res) =>{
 router.get('/posts/:id', isLoggedIn, async(req, res) =>{
   try{
     const data = await Post.findById(req.params.id).populate('comments').exec();
-    res.render('show', {data:data})
+    res.render('posts/show', {data:data})
   }catch(err){
     console.log(err)
   }
@@ -51,7 +51,7 @@ router.get('/posts/:id/edit', isLoggedIn, async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id})
     console.log(data)
-    res.render("edit", {data:data})
+    res.render("posts/edit", {data:data})
   }catch(err){
     console.log(err)
   }

@@ -5,6 +5,7 @@ const Comment = require('../models/commentSchema');
 
 // ##########################COMMENTS ROUTES##############################
 
+// Creating comment rout
 router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
   try{
     const postData = await Post.findById(req.params.id);
@@ -23,6 +24,17 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
   }
 })
 
+// Edit comment Routes
+router.get('/posts/:id/comments/:comment_id/edit', async(req, res) =>{
+  try{
+    res.send("Edit comment route")
+  }catch(err){
+    console.log(err)
+  }
+})
+
+
+// Delete comment Route
 router.delete('/posts/:id/comments/:comment_id', async(req, res) =>{
   try{
     await Post.updateOne(
