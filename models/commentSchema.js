@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Post = require('../models/postSchema')
 
 const commentSchema = new mongoose.Schema({
-    author:String,
+    author:String, //necessário transformar em objeto para conter objectId.
     comment: String,
 })
 

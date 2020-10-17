@@ -9,7 +9,7 @@ To dos
 - refactor code (adding router) - ok
 - Create Update and Delete for post routes - ok
 - Delete associated data - ok
-- Create Update and Delete for comments routes
+- Create Update and Delete for comments routes - ok
 - Create authorization middleware
 - Separate middlewares in a specific file
 - Adding GoogleMaps api

@@ -47,7 +47,7 @@ router.get('/posts/:id', isLoggedIn, async(req, res) =>{
   }
 })
 
-router.get('/posts/:id/edit', isLoggedIn, async (req, res) =>{
+router.get('/posts/:id/edit', isLoggedIn, isPostOwner, async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id})
     console.log(data)
@@ -85,7 +85,25 @@ function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }
+  req.flash('error', "Você precisa fazer login")
   res.redirect('/login')
+}
+
+async function isPostOwner(req, res, next){ //Necessário refatorar por questão do objectID
+  if(req.isAuthenticated()){
+    const data = await Post.findById({_id:req.params.id})
+    console.log(data.author);
+    console.log(req.user.username);
+    if(data.author.equals(req.user.username)){
+      console.log('FUNCIONANDO');
+      return next();
+    }else{
+      res.redirect('back')
+    }
+  }else{
+    req.flash('error', "Você não é o autor dessa publicação")
+    res.redirect('/login');
+  }
 }
 
 module.exports = router;

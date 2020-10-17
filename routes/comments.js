@@ -41,7 +41,6 @@ router.put('/posts/:id/comments/:comment_id', async(req, res) =>{
     await Comment.updateOne({_id: req.params.comment_id}, {comment: req.body.comment} )
     req.flash('success', 'Comentário editado com sucesso!')
     res.redirect(`/posts/${req.params.id}`)
-    // await res.send('update comment route')
   }catch(err){
     console.log(err)
   }
