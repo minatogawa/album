@@ -11,7 +11,10 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
     const postData = await Post.findById(req.params.id);
     const Comm = await Comment.create(
       {
-        author: req.user.username,
+        author: {
+          id: req.user.id,
+          username: req.user.username,
+        },
         comment:req.body.comment
       }
     );

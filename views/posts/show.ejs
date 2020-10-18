@@ -15,7 +15,7 @@
         <div class="d-flex m-0">
           <p class="lead">
             by
-            <a href="#"><%=data.author%></a>
+            <a href="#"><%=data.author.username%></a>
           </p>
           <div class="ml-auto">
             <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
@@ -60,7 +60,7 @@
           <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
-              <h5 class="mt-0"><%=item.author%></h5>
+              <h5 class="mt-0"><%=item.author.username%></h5>
               <p><%=item.comment%></p>
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit">Edit</a></button>

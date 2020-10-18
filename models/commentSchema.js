@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-const Post = require('../models/postSchema')
+const Post = require('../models/postSchema');
+const User = require('../models/userSchema');
 
 const commentSchema = new mongoose.Schema({
-    author:String, //necessário transformar em objeto para conter objectId.
+    author:{
+        id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        username: String,
+    },
     comment: String,
 })
 

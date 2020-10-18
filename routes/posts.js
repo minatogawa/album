@@ -13,6 +13,7 @@ router.get('/posts', isLoggedIn, async(req, res) =>{
     try{
       const data = await Post.find({});
       res.render("posts/index", {data: data})
+      console.log(req.user);
     }catch(err){
       console.log(err)  
     }
@@ -28,9 +29,11 @@ router.post('/posts', async (req, res) =>{
       title: req.body.title,
       image: req.body.image,
       description: req.body.description,
-      author: req.user.username,
+      author: {
+        id:req.user.id,
+        username:req.user.username,
+      }
     })
-    console.log(req.user.username)
     req.flash('success', "Seu post foi criado com sucesso!")
     res.redirect("/posts")
   }catch(err){
@@ -89,19 +92,18 @@ function isLoggedIn(req, res, next){
   res.redirect('/login')
 }
 
-async function isPostOwner(req, res, next){ //Necessário refatorar por questão do objectID
+async function isPostOwner(req, res, next){ 
   if(req.isAuthenticated()){
     const data = await Post.findById({_id:req.params.id})
-    console.log(data.author);
-    console.log(req.user.username);
-    if(data.author.equals(req.user.username)){
+    if(data.author.id.equals(req.user.id)){
       console.log('FUNCIONANDO');
       return next();
     }else{
+      req.flash('error', "Você não é o autor dessa publicação")
       res.redirect('back')
     }
   }else{
-    req.flash('error', "Você não é o autor dessa publicação")
+    req.flash('error', "Você precisa fazer login")
     res.redirect('/login');
   }
 }

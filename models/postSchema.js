@@ -10,7 +10,11 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-    author:String, //Porque Colt salvou o Id junto, e porque usando objectId?
+    author:{
+        id: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
+        username: String, 
+    }
+    //Porque Colt salvou o Id junto, e porque usando objectId?
     //Resposta:Para depois poder usar o equals, que é um método do objectId do mongoose. Preciso refatorar isso.
 })
 
