@@ -28,10 +28,9 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
 })
 
 // Edit comment Route
-router.get('/posts/:id/comments/:comment_id/edit', async(req, res) =>{
+router.get('/posts/:id/comments/:comment_id/edit', isCommentOwner, async(req, res) =>{
   try{
     const data = await Comment.findById({_id: req.params.comment_id});
-    console.log(data);
     res.render("comments/edit", {data:data, post_id:req.params.id})
   }catch(err){
     console.log(err)
@@ -72,6 +71,19 @@ function isLoggedIn(req, res, next){
       return next();
     }
     res.redirect('/login')
+}
+
+async function isCommentOwner(req, res, next){
+  if(req.isAuthenticated()){
+    const data = await Comment.findById({_id:req.params.comment_id})
+    if(data.author.id.equals(req.user.id)){
+      return next();
+    }
+    req.flash("error", "Você não tem autorização para essa ação")
+    res.redirect('back');
+  }
+  req.flash("error", "Você precisa fazer login")
+  res.redirect('/login')
 }
   
 

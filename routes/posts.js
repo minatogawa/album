@@ -23,7 +23,7 @@ router.get('/posts/new', isLoggedIn, (req, res) =>{
     res.render('posts/new')
 })
 
-router.post('/posts', async (req, res) =>{
+router.post('/posts', isLoggedIn, async (req, res) =>{
   try{
     await Post.create({
       title: req.body.title,
@@ -50,6 +50,7 @@ router.get('/posts/:id', isLoggedIn, async(req, res) =>{
   }
 })
 
+//Edit and Update Routes for Posts
 router.get('/posts/:id/edit', isLoggedIn, isPostOwner, async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id})
@@ -60,7 +61,7 @@ router.get('/posts/:id/edit', isLoggedIn, isPostOwner, async (req, res) =>{
   }
 })
 
-router.put('/posts/:id', async(req, res) =>{
+router.put('/posts/:id', isLoggedIn, isPostOwner, async(req, res) =>{
   try{
     const data = await Post.findByIdAndUpdate(req.params.id, {
       title:req.body.title,
@@ -73,7 +74,8 @@ router.put('/posts/:id', async(req, res) =>{
   }
 })
 
-router.delete('/posts/:id', async (req, res) =>{
+//Delete routes for Posts
+router.delete('/posts/:id', isLoggedIn, isPostOwner, async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id});
     await data.remove()
@@ -96,7 +98,6 @@ async function isPostOwner(req, res, next){
   if(req.isAuthenticated()){
     const data = await Post.findById({_id:req.params.id})
     if(data.author.id.equals(req.user.id)){
-      console.log('FUNCIONANDO');
       return next();
     }else{
       req.flash('error', "Você não é o autor dessa publicação")
