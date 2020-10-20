@@ -10,8 +10,9 @@ To dos
 - Create Update and Delete for post routes - ok
 - Delete associated data - ok
 - Create Update and Delete for comments routes - ok
-- Create authorization middleware
-- Separate middlewares in a specific file
+- Create authorization middleware - ok
+- Separate middlewares in a specific file - ok
+- Hide edit and delete buttons in show page
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms

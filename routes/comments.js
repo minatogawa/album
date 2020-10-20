@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/postSchema');
 const Comment = require('../models/commentSchema');
+const middlewares = require('../middlewares/index');
 
 // ##########################COMMENTS ROUTES##############################
 
 // Creating comment rout
-router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
+router.post('/posts/:id/comments', middlewares.isLoggedIn, async(req, res) =>{
   try{
     const postData = await Post.findById(req.params.id);
     const Comm = await Comment.create(
@@ -28,7 +29,7 @@ router.post('/posts/:id/comments', isLoggedIn, async(req, res) =>{
 })
 
 // Edit comment Route
-router.get('/posts/:id/comments/:comment_id/edit', isCommentOwner, async(req, res) =>{
+router.get('/posts/:id/comments/:comment_id/edit', middlewares.isCommentOwner, async(req, res) =>{
   try{
     const data = await Comment.findById({_id: req.params.comment_id});
     res.render("comments/edit", {data:data, post_id:req.params.id})
@@ -38,7 +39,7 @@ router.get('/posts/:id/comments/:comment_id/edit', isCommentOwner, async(req, re
 })
 
 // Update comment Route
-router.put('/posts/:id/comments/:comment_id', async(req, res) =>{
+router.put('/posts/:id/comments/:comment_id', middlewares.isCommentOwner, async(req, res) =>{
   try{
     await Comment.updateOne({_id: req.params.comment_id}, {comment: req.body.comment} )
     req.flash('success', 'Comentário editado com sucesso!')
@@ -50,7 +51,7 @@ router.put('/posts/:id/comments/:comment_id', async(req, res) =>{
 
 
 // Delete comment Route
-router.delete('/posts/:id/comments/:comment_id', async(req, res) =>{
+router.delete('/posts/:id/comments/:comment_id', middlewares.isCommentOwner, async(req, res) =>{
   try{
     await Post.updateOne(
       {_id: req.params.id}, 
@@ -64,27 +65,6 @@ router.delete('/posts/:id/comments/:comment_id', async(req, res) =>{
   } catch(err){
     console.log(err);
   } 
-})
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-      return next();
-    }
-    res.redirect('/login')
-}
-
-async function isCommentOwner(req, res, next){
-  if(req.isAuthenticated()){
-    const data = await Comment.findById({_id:req.params.comment_id})
-    if(data.author.id.equals(req.user.id)){
-      return next();
-    }
-    req.flash("error", "Você não tem autorização para essa ação")
-    res.redirect('back');
-  }
-  req.flash("error", "Você precisa fazer login")
-  res.redirect('/login')
-}
-  
+})  
 
 module.exports = router;

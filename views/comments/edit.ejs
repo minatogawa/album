@@ -3,7 +3,7 @@
 
 <div class="container d-flex justify-content-center">
     <form class="w-50" action="/posts/<%=post_id%>/comments/<%=data._id%>?_method=PUT" method="POST">
-        <h1 class="text-center mb-5">Editar Comentário de <%=data.author%></h1>
+        <h1 class="text-center mb-5">Editar Comentário de <%=data.author.username%></h1>
         <div class="form-group">
             <textarea class="form-control" name="comment" id="Textarea1" rows="3"><%=data.comment%></textarea>
         </div>
