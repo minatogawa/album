@@ -17,12 +17,14 @@
             by
             <a href="#"><%=data.author.username%></a>
           </p>
-          <div class="ml-auto">
-            <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
-            <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-            </form>
-          </div>
+          <%if(data.author.id.equals(user.id)){%>
+            <div class="ml-auto">
+              <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
+              <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          <%}%>
         </div>
         
         <hr>
@@ -62,12 +64,16 @@
             <div class="media-body">
               <h5 class="mt-0"><%=item.author.username%></h5>
               <p><%=item.comment%></p>
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit">Edit</a></button>
-                <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                </form>
-              </div>
+
+              <%if(item.author.id.equals(user.id)){%>
+                <div class="d-flex justify-content-end">
+                  <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit">Edit</a></button>
+                  <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                  </form>
+                </div>
+              <%}%>
+
             </div>
           </div>
         <%}%>        

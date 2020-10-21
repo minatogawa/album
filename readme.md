@@ -12,9 +12,11 @@ To dos
 - Create Update and Delete for comments routes - ok
 - Create authorization middleware - ok
 - Separate middlewares in a specific file - ok
-- Hide edit and delete buttons in show page
+- Hide edit and delete buttons in show page - ok
+- Add static files
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms
 - Add timestamp
+- Handle mongoose deprecation warnings
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/postSchema');
-const Comment = require('../models/commentSchema');
 const middlewares = require('../middlewares/index')
 
 router.get('/', (req, res) =>{
@@ -15,7 +14,6 @@ router.get('/posts', middlewares.isLoggedIn, async(req, res) =>{
     try{
       const data = await Post.find({});
       res.render("posts/index", {data: data})
-      console.log(req.user);
     }catch(err){
       console.log(err)  
     }
@@ -58,7 +56,6 @@ router.get('/posts/:id', middlewares.isLoggedIn, async(req, res) =>{
 router.get('/posts/:id/edit', middlewares.isPostOwner, async (req, res) =>{
   try{
     const data = await Post.findById({_id:req.params.id})
-    console.log(data)
     res.render("posts/edit", {data:data})
   }catch(err){
     console.log(err)

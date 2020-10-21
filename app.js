@@ -48,6 +48,8 @@ app.use((req, res, next)=>{
 app.use(postsRoutes);
 app.use(commentsRoutes);
 app.use(authenticationRoutes);
+app.use(express.static('public'));
+
 
 
 // Passport configs
