@@ -12,13 +12,13 @@
         <!-- Title -->
         <h1 class="mt-4"><%=data.title%></h1>
         <!-- Author -->
-        <div class="d-flex m-0">
+        <div class="d-flex m-0  myDiv">
           <p class="lead">
             by
             <a href="#"><%=data.author.username%></a>
           </p>
           <%if(data.author.id.equals(user.id)){%>
-            <div class="ml-auto">
+            <div class="ml-auto hide">
               <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
               <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
                 <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
@@ -61,12 +61,12 @@
         <%for(item of data.comments){%>
           <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
+            <div class="media-body myDiv">
               <h5 class="mt-0"><%=item.author.username%></h5>
               <p><%=item.comment%></p>
 
               <%if(item.author.id.equals(user.id)){%>
-                <div class="d-flex justify-content-end">
+                <div class="hide">
                   <button type="button" class="btn btn-outline-secondary btn-sm mr-1"><a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit">Edit</a></button>
                   <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
