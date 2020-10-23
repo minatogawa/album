@@ -12,16 +12,16 @@
         <!-- Title -->
         <h1 class="mt-4"><%=data.title%></h1>
         <!-- Author -->
-        <div class="d-flex m-0  myDiv">
+        <div class="d-flex m-0 postHead">
           <p class="lead">
             by
             <a href="#"><%=data.author.username%></a>
           </p>
           <%if(data.author.id.equals(user.id)){%>
             <div class="ml-auto hide">
-              <button type="button" class="btn btn-outline-secondary btn-sm"><a href="/posts/<%=data._id%>/edit">Edit</a></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm "><a href="/posts/<%=data._id%>/edit">Edit</a></button>
               <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                <button type="submit" class="btn btn-outline-danger btn-sm hide">Delete</button>
               </form>
             </div>
           <%}%>
