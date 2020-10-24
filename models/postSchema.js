@@ -10,12 +10,14 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
+    //Porque Salvei o Id junto em versões anteriores?
+    //Resposta:Para depois poder usar o equals, que é um método do objectId do mongoose.
     author:{
         id: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
         username: String, 
-    }
-    //Porque Colt salvou o Id junto, e porque usando objectId?
-    //Resposta:Para depois poder usar o equals, que é um método do objectId do mongoose. Preciso refatorar isso.
+    },
+    date:{type: Date, default: Date.now}
+    
 })
 
 postSchema.pre('remove', async function(){

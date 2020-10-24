@@ -18,6 +18,8 @@ To dos
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms
-- Add timestamp
+- Add timestamp for the show page - ok
+- Add icons
+- Break text in the show page (title, description and comments)
 - Handle mongoose deprecation warnings
 
