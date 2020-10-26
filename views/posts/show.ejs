@@ -19,9 +19,13 @@
           </p>
           <%if(data.author.id.equals(user.id)){%>
             <div class="ml-auto hide">
-              <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">Edit</a>
+              <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">
+                <i class="far fa-edit"></i>
+              </a>
               <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                  <i class="far fa-trash-alt"></i>
+                </button>
               </form>
             </div>
           <%}%>
@@ -81,9 +85,13 @@
 
               <%if(item.author.id.equals(user.id)){%>
                 <div class="hide">
-                  <a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">Edit</a>
+                  <a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">
+                    <i class="far fa-edit"></i>
+                  </a>
                   <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
                   </form>
                 </div>
               <%}%>
