@@ -4,7 +4,7 @@
 
 
 .actions:hover .hide{
-    display: inline;
+    display: flex;
 }
 
 .zoom:hover{

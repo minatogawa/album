@@ -6,49 +6,49 @@
 
     <div class="row">
 
-      <!-- Post Content Column -->
-      <div class="col-lg-8">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
 
-        <!-- Title -->
-        <h1 class="mt-4"><%=data.title%></h1>
-        <!-- Author -->
-        <div class="d-flex m-0 actions">
-          <p class="lead">
-            by
-            <a href="#"><%=data.author.username%></a>
-          </p>
-          <%if(data.author.id.equals(user.id)){%>
-            <div class="ml-auto hide">
-              <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">
-                <i class="far fa-edit"></i>
-              </a>
-              <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-outline-danger btn-sm">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-              </form>
-            </div>
-          <%}%>
+          <!-- Title -->
+          <div class="actions">
+            <h1 class="mt-4 text-break"><%=data.title%></h1>
+            <!-- Author -->
+            <div>
+              <%if(data.author.id.equals(user.id)){%>
+                <div class="hide justify-content-end">
+                  <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm mr-1">
+                    <i class="far fa-edit"></i>
+                  </a>
+                  <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </div>
+              <%}%>
+              <p class="lead">
+                by
+                <a href="#"><%=data.author.username%></a>
+              </p>
+            </div>  
+
+          <!-- Date/Time -->
+          <%
+            const monthsName = [
+              "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+              "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ]
+            const weekDays = [
+              "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
+            ]
+            const w = weekDays[data.date.getDay()];
+            const d = data.date.getDate();
+            const m = monthsName[data.date.getMonth()];
+            const y = data.date.getFullYear();
+          %>
+
+          <small><%= w + ", " + d + " de " +  m + " de " + y  %></small>
         </div>
-        
-       
-
-        <!-- Date/Time -->
-        <%
-          const monthsName = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-          ]
-          const weekDays = [
-            "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
-          ]
-          const w = weekDays[data.date.getDay()];
-          const d = data.date.getDate();
-          const m = monthsName[data.date.getMonth()];
-          const y = data.date.getFullYear();
-        %>
-
-        <small><%= w + ", " + d + " de " +  m + " de " + y  %></small>
         <hr>
 
         <!-- Preview Image -->
@@ -57,7 +57,7 @@
         <hr>
 
         <!-- Post Content -->
-        <p class="lead"><%=data.description%></p>
+        <p class="lead text-break"><%=data.description%></p>
 
         <hr>
 
@@ -81,11 +81,9 @@
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body actions">
               <h5 class="mt-0"><%=item.author.username%></h5>
-              <p><%=item.comment%></p>
-
               <%if(item.author.id.equals(user.id)){%>
-                <div class="hide">
-                  <a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm">
+                <div class="hide justify-content-end">
+                  <a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm mr-1">
                     <i class="far fa-edit"></i>
                   </a>
                   <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
@@ -95,7 +93,7 @@
                   </form>
                 </div>
               <%}%>
-
+              <p class="text-break"><%=item.comment%></p>
             </div>
           </div>
         <%}%>        

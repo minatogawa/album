@@ -3,7 +3,7 @@
 
 <div class="container d-flex justify-content-center">
     <form class="w-50" action="/posts/<%=data._id%>?_method=PUT" method="POST">
-        <h1 class="text-center mb-5">Editar "<%=data.title%>"</h1>
+        <h1 class="text-center mb-5 text-break">Editar "<%=data.title%>"</h1>
         <div class="form-group">
           <input type="text" name="title" class="form-control form-control-lg" placeholder ="Título" value="<%=data.title%>">
         </div>

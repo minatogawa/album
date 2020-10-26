@@ -14,12 +14,13 @@ To dos
 - Separate middlewares in a specific file - ok
 - Hide edit and delete buttons in show page - ok
 - Add static files - ok
-- add fade in fade out for action buttons
+- add dropdown menu for actions buttons (like facebook)
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms
 - Add timestamp for the show page - ok
-- Add icons
-- Break text in the show page (title, description and comments)
+- Add icons - ok
+- Break text in the show page (title, description and comments) - ok
 - Handle mongoose deprecation warnings
+- Limit characters in the inputs and textarea
 
