@@ -19,8 +19,9 @@ To dos
 - Update Post Schema with geolocation info
 - Sanitize forms
 - Add timestamp for the show page - ok
-- Add icons - ok
+- Add icons (Remove font awesome, add lighter option) - ok
 - Break text in the show page (title, description and comments) - ok
 - Handle mongoose deprecation warnings
 - Limit characters in the inputs and textarea
+
 

@@ -3,34 +3,32 @@
 
   <!-- Page Content -->
   <div class="container">
-
     <div class="row">
-
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
-
-          <!-- Title -->
-          <div class="actions">
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+        <!-- Title -->
+        <div class="actions">
+          <!-- Action buttons -->
+          <%if(data.author.id.equals(user.id)){%>
+            <div class="hide justify-content-end">
+              <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm mr-1">
+               <img src="/icons/lapis.svg"  width="20" height="20" alt="Edit">
+              </a>
+              <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                  <img src="/icons/excluir.svg"  width="20" height="20" alt="Delete">
+                </button>
+              </form>
+            </div>
+          <%}%>
+          <!-- Author -->
+          <div>
             <h1 class="mt-4 text-break"><%=data.title%></h1>
-            <!-- Author -->
-            <div>
-              <%if(data.author.id.equals(user.id)){%>
-                <div class="hide justify-content-end">
-                  <a href="/posts/<%=data._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm mr-1">
-                    <i class="far fa-edit"></i>
-                  </a>
-                  <form class="d-inline" action="/posts/<%=data._id%>?_method=DELETE" method="POST">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </div>
-              <%}%>
-              <p class="lead">
-                by
-                <a href="#"><%=data.author.username%></a>
-              </p>
-            </div>  
+            <p class="lead">
+              by
+              <a href="#"><%=data.author.username%></a>
+            </p>
+          </div>  
 
           <!-- Date/Time -->
           <%
@@ -46,9 +44,9 @@
             const m = monthsName[data.date.getMonth()];
             const y = data.date.getFullYear();
           %>
-
           <small><%= w + ", " + d + " de " +  m + " de " + y  %></small>
         </div>
+        
         <hr>
 
         <!-- Preview Image -->
@@ -62,7 +60,6 @@
         <hr>
 
         <!-- Comments Form -->
-       
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
@@ -84,11 +81,11 @@
               <%if(item.author.id.equals(user.id)){%>
                 <div class="hide justify-content-end">
                   <a href="/posts/<%=data._id%>/comments/<%=item._id%>/edit" type="button" class="btn btn-outline-secondary btn-sm mr-1">
-                    <i class="far fa-edit"></i>
+                    <img src="/icons/lapis.svg"  width="15" height="15" alt="Edit">
                   </a>
                   <form class="d-inline" action="/posts/<%=data._id%>/comments/<%=item._id%>?_method=DELETE" method="POST">
                     <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="far fa-trash-alt"></i>
+                      <img src="/icons/excluir.svg"  width="15" height="15" alt="Delete">
                     </button>
                   </form>
                 </div>
@@ -119,15 +116,11 @@
                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
               </div>
             </div>
-
           </div>
         </div> -->
-
       </div>
-
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
-
         <!-- Search Widget -->
         <!-- <div class="card my-4">
           <h5 class="card-header">Search</h5>
@@ -183,27 +176,9 @@
             You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
           </div>
         </div>
-
       </div>
-
     </div>
     <!-- /.row -->
-
   </div>
-  <!-- /.container -->
-
-<!-- <div class="card mb-3 container" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src=<%= data.image%> class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= data.title%></h5>
-          <p class="card-text"><%= data.description%></p>
-        </div>
-      </div>
-    </div>
-</div> -->
 
 <%- include ('../partials/footer')%>
