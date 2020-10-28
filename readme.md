@@ -23,5 +23,6 @@ To dos
 - Sanitize forms
 - Handle mongoose deprecation warnings
 - Limit characters in the inputs and textarea
+- Add hashtags feature when creating a new post
 
 
