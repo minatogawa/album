@@ -18,6 +18,7 @@ To dos
 - Add icons (Remove font awesome, add lighter option) - ok
 - Break text in the show page (title, description and comments) - ok
 - add dropdown menu for actions buttons (like facebook)
+- Add file upload
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms
