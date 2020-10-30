@@ -2,13 +2,19 @@
 
 
 <div class="container d-flex justify-content-center">
-    <form class="w-50" action="/posts" method="POST">
+    <form class="w-50" action="/posts" method="POST" enctype="multipart/form-data"
         <h1 class="text-center mb-5">Novo post</h1>
         <div class="form-group">
           <input type="text" name="title" class="form-control form-control-lg" placeholder ="Título">
         </div>
         <div class="form-group">
           <input type="url" name="image" class="form-control form-control-lg" placeholder ="URL da Foto">
+        </div>
+        <div class="input-group mb-3">
+          <div class="custom-file">
+            <input name="picture" type="file" class="custom-file-input" id="inputGroupFile01" multiple>
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
         </div>
         <div class="form-group">
           <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>

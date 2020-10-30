@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/postSchema');
-const middlewares = require('../middlewares/index')
+const middlewares = require('../middlewares/index');
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 router.get('/', (req, res) =>{
   res.send("hello world")
@@ -24,19 +26,21 @@ router.get('/posts/new', middlewares.isLoggedIn, (req, res) =>{
     res.render('posts/new')
 })
 
-router.post('/posts', middlewares.isLoggedIn, async (req, res) =>{
+router.post('/posts', upload.array('picture'), middlewares.isLoggedIn, async (req, res) =>{
   try{
-    await Post.create({
-      title: req.body.title,
-      image: req.body.image,
-      description: req.body.description,
-      author: {
-        id:req.user.id,
-        username:req.user.username,
-      }
-    })
+    // await Post.create({
+    //   title: req.body.title,
+    //   image: req.body.image,
+    //   description: req.body.description,
+    //   author: {
+    //     id:req.user.id,
+    //     username:req.user.username,
+    //   }
+    // })
+    console.log(req.body, req.files)
     req.flash('success', "Seu post foi criado com sucesso!")
     res.redirect("/posts")
+    
   }catch(err){
     console.log(err);
   }
