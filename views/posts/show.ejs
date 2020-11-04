@@ -49,8 +49,25 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src=<%=data.image%> alt="">
-
+        
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <%data.image.forEach((item, idx) =>{%>
+                <div class="carousel-item <%= idx === 0 ? 'active' : '' %>" >
+                  <img class="d-block w-100" src=<%=item.path%> alt="testing">
+                </div>
+              <%})%>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <!-- <img class="img-fluid rounded" src=<%=item.path%> alt=""> -->
         <hr>
 
         <!-- Post Content -->
@@ -74,7 +91,7 @@
         <!-- Single Comment -->
         <%for(item of data.comments){%>
           <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="dasdas">
             <div class="media-body actions">
               <h5 class="mt-0"><%=item.author.username%></h5>
               <%if(item.author.id.equals(user.id)){%>

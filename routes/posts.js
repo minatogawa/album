@@ -3,7 +3,8 @@ const router = express.Router();
 const Post = require('../models/postSchema');
 const middlewares = require('../middlewares/index');
 const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const {storage} = require('../cloudinary/index');
+const upload = multer({storage});
 
 router.get('/', (req, res) =>{
   res.send("hello world")
@@ -28,15 +29,15 @@ router.get('/posts/new', middlewares.isLoggedIn, (req, res) =>{
 
 router.post('/posts', upload.array('picture'), middlewares.isLoggedIn, async (req, res) =>{
   try{
-    // await Post.create({
-    //   title: req.body.title,
-    //   image: req.body.image,
-    //   description: req.body.description,
-    //   author: {
-    //     id:req.user.id,
-    //     username:req.user.username,
-    //   }
-    // })
+    await Post.create({
+      title: req.body.title,
+      image: req.files,
+      description: req.body.description,
+      author: {
+        id:req.user.id,
+        username:req.user.username,
+      }
+    })
     console.log(req.body, req.files)
     req.flash('success', "Seu post foi criado com sucesso!")
     res.redirect("/posts")

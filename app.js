@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production"){
+  require('dotenv').config()
+}
+
 // NPM required packages
 const express = require('express');
 const app = express();

@@ -19,6 +19,15 @@ To dos
 - Break text in the show page (title, description and comments) - ok
 - add dropdown menu for actions buttons (like facebook)
 - Add file upload
+    - Add Cloudinary and .env file - ok
+    - Add multer for multiple image uploads - ok
+    - Save file upload at mongo - ok
+    - Add carousel for multiple images cards - ok
+    - Remove carousel arrows for single image cards 
+    - limit picture's size in the index file
+    - Add upload to edit page
+    - Customize file input
+    - Delete images forms
 - Adding GoogleMaps api
 - Update Post Schema with geolocation info
 - Sanitize forms

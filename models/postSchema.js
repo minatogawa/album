@@ -4,7 +4,12 @@ const User = require('./userSchema');
 
 const postSchema = new mongoose.Schema({
     title: String,
-    image: String,
+    image: [
+        {
+            path:String,
+            filename:String,
+        }
+    ],
     description: String,
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
