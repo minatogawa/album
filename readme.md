@@ -23,17 +23,17 @@ To dos
     - Add multer for multiple image uploads - ok
     - Save file upload at mongo - ok
     - Add carousel for multiple images cards - ok
-    - Remove carousel arrows for single image cards 
-    - limit picture's size in the index file
+    - Remove carousel arrows for single image cards - ok
+    - limit picture's size in the index file - ?
     - Add upload to edit page
-    - Customize file input
+    - Customize file input - ok
     - Delete images forms
-- Adding GoogleMaps api
-- Update Post Schema with geolocation info
+- Adding GoogleMaps api - ?
+- Update Post Schema with geolocation info - ?
 - Sanitize forms
 - Handle mongoose deprecation warnings
-- Limit characters in the inputs and textarea
-- Add hashtags feature when creating a new post
+- Limit characters in the inputs and textarea - ?
+- Add hashtags feature when creating a new post - ?
 - Change html tags to increase semantic
 
 

@@ -34,7 +34,7 @@
       <%for(item of data){%>
         <div class="card">
           <!-- Removed data-ride attribute for avoiding automatic sliding -->
-          <div id="a<%=item._id%>" class="carousel slide">
+          <div id="a<%=item._id%>" class="carousel slide" data-interval="false" data-ride="carousel">
             <div class="carousel-inner">
               <%item.image.forEach((picture, idx) =>{%>
                   <div class="carousel-item <%= idx == 0 ? 'active' : '' %>">
